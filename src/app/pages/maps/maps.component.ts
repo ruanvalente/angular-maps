@@ -10,28 +10,12 @@ import { latLng, MapOptions, tileLayer, Map, Marker, icon } from 'leaflet';
 export class MapsComponent implements OnInit {
   map: Map;
   mapOptions: MapOptions;
-  positions: [
-    {
-      first: {
-        longitude: -1.4562099;
-        latitude: -48.4539212;
-      };
 
-      second: {
-        longitude: -1.4498984;
-        latitude: -48.4658982;
-      };
-
-      third: {
-        longitude: -1.4498984;
-        latitude: -48.4658982;
-      };
-
-      four: {
-        longitude: -1.4548463;
-        latitude: -48.4588649;
-      };
-    }
+  options = [
+    { lat: -1.4587143, long: -48.4733022 },
+    { lat: -1.458532, long: -48.4816492 },
+    { lat: -1.4606878, long: -48.4898031 },
+    { lat: -1.4651979, long: -48.4981477 },
   ];
 
   constructor() {}
@@ -62,41 +46,15 @@ export class MapsComponent implements OnInit {
   }
 
   private addSampleMarker() {
-    let marker = new Marker([-1.4562099, -48.4539212]).setIcon(
-      icon({
-        iconSize: [25, 41],
-        iconAnchor: [13, 41],
-        iconUrl: 'assets/marker-icon.svg',
-      })
-    );
-
-    let marker2 = new Marker([-1.4498984, -48.4658982]).setIcon(
-      icon({
-        iconSize: [25, 41],
-        iconAnchor: [13, 41],
-        iconUrl: 'assets/marker-icon.svg',
-      })
-    );
-
-    let marker3 = new Marker([-1.4552822, -48.4556163]).setIcon(
-      icon({
-        iconSize: [25, 41],
-        iconAnchor: [13, 41],
-        iconUrl: 'assets/marker-icon.svg',
-      })
-    );
-
-    let marker4 = new Marker([-1.4548463, -48.4588649]).setIcon(
-      icon({
-        iconSize: [25, 41],
-        iconAnchor: [13, 41],
-        iconUrl: 'assets/marker-icon.svg',
-      })
-    );
-
-    marker.addTo(this.map);
-    marker2.addTo(this.map);
-    marker3.addTo(this.map);
-    marker4.addTo(this.map);
+    this.options.map((data) => {
+      let marker = new Marker([data.lat, data.long]).setIcon(
+        icon({
+          iconSize: [25, 41],
+          iconAnchor: [13, 41],
+          iconUrl: 'assets/marker-icon.svg',
+        })
+      );
+      marker.addTo(this.map);
+    });
   }
 }
